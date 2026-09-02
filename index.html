@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d71920">
+<meta name="description" content="VVM News Engine — Hệ thống quản trị Tạp chí Tình nguyện Việt Nam">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="VVM News Engine">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>VVM News Engine</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#fff;color:#171717}
+body{overflow:hidden}
+.app{min-height:100%;display:flex;align-items:center;justify-content:center;padding:28px;position:relative;overflow:hidden;background:linear-gradient(145deg,#fff 0%,#fff7f7 52%,#ffeaea 100%)}
+.bg1,.bg2{position:absolute;border-radius:50%;filter:blur(3px);opacity:.16;pointer-events:none}
+.bg1{width:420px;height:420px;background:#d71920;right:-170px;top:-180px}
+.bg2{width:360px;height:360px;background:#ff7a00;left:-180px;bottom:-160px}
+.card{width:min(520px,100%);background:rgba(255,255,255,.9);border:1px solid rgba(215,25,32,.10);box-shadow:0 24px 70px rgba(80,10,15,.12);border-radius:30px;padding:30px 26px;position:relative;z-index:1;backdrop-filter:blur(18px);text-align:center}
+.logo{width:108px;height:108px;object-fit:contain;border-radius:50%;margin:0 auto 16px;box-shadow:0 12px 35px rgba(215,25,32,.16)}
+h1{font-size:29px;line-height:1.05;margin:0;font-weight:850;letter-spacing:-.8px;color:#b90f17}
+.sub{font-size:14px;color:#6b6b6b;margin:10px 0 24px}
+.status{display:flex;align-items:center;gap:10px;text-align:left;background:#f7faf7;border:1px solid #e5eee6;border-radius:16px;padding:13px 14px;margin-bottom:16px}
+.dot{width:10px;height:10px;border-radius:50%;background:#22a447;box-shadow:0 0 0 5px rgba(34,164,71,.1)}
+.status b{font-size:14px}.status span{display:block;color:#777;font-size:12px;margin-top:2px}
+button,.open{width:100%;border:0;border-radius:17px;padding:16px 18px;font-size:16px;font-weight:800;cursor:pointer;text-decoration:none;display:block}
+.open{color:#fff;background:linear-gradient(135deg,#d71920,#ef3d35);box-shadow:0 13px 28px rgba(215,25,32,.25)}
+.open:active{transform:scale(.985)}
+.install{margin-top:10px;background:#fff;color:#c9141b;border:1px solid #f0c4c7;display:none}
+.note{font-size:11px;color:#8a8a8a;margin-top:18px;line-height:1.5}
+.footer{margin-top:20px;font-size:11px;color:#999}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="bg1"></div><div class="bg2"></div>
+<main class="card">
+<img class="logo" src="icon-512.png" alt="VVM">
+<h1>VVM NEWS ENGINE</h1>
+<div class="sub">Hệ thống quản trị Tạp chí Tình nguyện Việt Nam</div>
+<div class="status"><i class="dot"></i><div><b>Hệ thống sẵn sàng</b><span>Truy cập nhanh đến VVM News Engine</span></div></div>
+<a class="open" href="https://script.google.com/macros/s/AKfycbwY5eaU3mxKJPFEgASUWeanrhYRxw2esp44rUFBfc8i5cqFuUQxu1ODQfslHrTkYA/exec" rel="noopener">MỞ HỆ THỐNG&nbsp;&nbsp; →</a>
+<button class="install" id="installBtn">CÀI ĐẶT ỨNG DỤNG</button>
+<div class="note">Sau khi cài đặt, VVM News Engine sẽ có biểu tượng riêng trên màn hình điện thoại.</div>
+<div class="footer">TẠP CHÍ TÌNH NGUYỆN VIỆT NAM · VVM</div>
+</main>
+</div>
+<script>
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(()=>{});
+let deferredPrompt;
+const btn=document.getElementById("installBtn");
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;btn.style.display="block";});
+btn.addEventListener("click",async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;btn.style.display="none";});
+</script>
+</body>
+</html>
